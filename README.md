@@ -1,5 +1,3 @@
-Man kann den Modus aktivieren udn deaktivieren
+# Structured documents
 
-wenn aktiv, falls Seite geladen <get url>
-    <if url in list => redirect >
-    <else pass>
+Sometimes it's useful to have different levels of headings to structure your documents. Start lines with a `#` to create headings. Multiple `##` in a row denote smaller heading sizes.
