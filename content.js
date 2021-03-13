@@ -7,8 +7,8 @@ const minutes = time.getMinutes();
 
 const start1 = 1920;
 const end1 = 2000;
-const start2 = 740;
-const end2 = 1250;
+const start2 = 1650;
+const end2 = 1700;
 
 var x = ""
 
