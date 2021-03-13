@@ -1,30 +1,27 @@
-var checkbox = document.querySelector("input[name=checkbox]");
-
-checkbox.addEventListener('change', function() {
-  if (this.checked) {
-      alert('checked');    
-  } else {
-      alert('unchecked');
-  }
-});
-
-
-
 window.onload = function() {
-  document.getElementById("button").onclick = function() {
-    var value = document.getElementById("value_input").value;
-    // alert(value);
-    var x = Date.now();
-    chrome.storage.sync.set({x:value}, function() {
-      alert("Sucess")
-    });
-  }
 
+  //getButton
   document.getElementById("getButton").onclick = function() {
-    chrome.storage.sync.get("x", function(data) {
-      console.log(data.x)
+
+    chrome.storage.sync.get("website", function(data) {
+      if (data.website.website.length == 0) {
+        console.log("Es gibt keine Daten");
+      } else {
+        console.log(data.website.website.length);
+        console.log(data);
+      }
     });
   }
 
-
+  //add new data
+  document.getElementById("replaceButton").onclick = function() {
+    var value = document.getElementById("value_input").value;
+    chrome.storage.sync.get("website", function(data) {
+      console.log(data.website.website.push({"name":value}));
+      var new_data = data;
+      chrome.storage.sync.set({"website":new_data.website}), function() {
+        console.log("Daten wurden gespeichert")
+      }
+    })
+  }
 }
