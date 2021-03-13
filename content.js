@@ -42,8 +42,8 @@ if ( start1 <=  parseInt(x) && parseInt(x)< end1 ) {
     }
 }
 
-chrome.storage.sync.get("website", function(data) {
-    for (var i = 0; i < data.website.website.length; i++) {
-      alert(data.website.website[i].name);
-    }
-  });
+// chrome.storage.sync.get("website", function(data) {
+//     for (var i = 0; i < data.website.website.length; i++) {
+//       alert(data.website.website[i].name);
+//     }
+//   });
