@@ -2,20 +2,97 @@
     <head>
         <meta charset="utf-8">
         <title>Document</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
     </head>
     <body>
-        <script src="popop.js"></script>
+        <script src="popup.js"></script>
 
-        <input type="text" id="value_input">
+        <!-- <input type="text" id="value_input">
         <button name="button" id="getButton">Get Websites</button>
-
         <button id="addButton">Add Website</button>
+
+        <div id="div_website"></div> -->
+        <div class="sidebar">
+            <h2 class="sidebar_header">YourBlocker</h2>
+            <button class="sidebar_button" id="website"><a>Website</a></button>
+            <button class="sidebar_button" id="timeline"><a>Timeline</a></button>
+        </div>
+        <div class="center" id="center">
+        </div>
+
+
 
         <style>
             body {
-                width: 200px;
+                padding: 0;
+                margin: 0;
+                width: 500px;
+                height: auto;
+                background-color: white;
+            }
+            /* Sidebar Style */
+            .sidebar {
                 height: 300px;
-                background-color: bisque;
+                width: 150px;
+                background-color: white; 
+                float: left;
+                border-right: 5px solid;
+                border-color: black;
+                position: relative;
+                text-align: center;
+                font-family: 'Roboto Mono', monospace;
+            }
+            .sidebar_button {
+                border: none;
+                background-color: white;
+                color: black;
+                align-items: center;
+                display: block;
+                margin: 0 auto;
+                margin-top: 20px;
+                font-size: 15px;
+                font-family: 'Roboto Mono', monospace;
+            }
+            .center {
+                padding: 0;
+                margin: 0;
+                height: 250px;
+                background-color: white;
+                text-align: center;
+                font-family: 'Roboto Mono', monospace;
+                overflow:auto;
+            }
+            /* Center Style */
+            .center_header {
+                text-align: center;
+            }
+            .center_website_p {
+                text-align: center;
+                font-size: 10px;
+            }
+            .add_website_button {
+                background-color: white;
+                text-align: center;
+                align-items: center;
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                align-items: center;
+                border: none;
+                border-top: 3px solid;
+                border-left: 3px solid;
+                height: 30px;
+                width: 90px;
+            }
+            .website_input {
+                bottom: 0;
+                position: absolute;
+                left: 155px;
+                width: 255px;
+                border: none;
+                border-top: 3px solid;
+                height:30px;
             }
         </style>
     </body>

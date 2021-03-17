@@ -5,8 +5,8 @@ const time = new Date()
 const hour = time.getHours();
 const minutes = time.getMinutes();
 
-const start1 = 1920;
-const end1 = 2000;
+const start1 = 2359;
+const end1 = 2360;
 const start2 = 740;
 const end2 = 1250;
 
