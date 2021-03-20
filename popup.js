@@ -124,6 +124,7 @@ function loadTimeline() {
             t2 = document.getElementById("secondtime").value = null;
         } else {
             console.log("Message: input not valid");
+            console.log("Message: time1 bigger time2")
         };
     })
     center.appendChild(node);
