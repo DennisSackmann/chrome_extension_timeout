@@ -65,16 +65,33 @@ function loadTimeline() {
     node.appendChild(textnode);
     node.setAttribute("class", "center_header")
     center.appendChild(node);
+    //timelines
+    chrome.storage.sync.get("time", function(data) {
+        for (var i = 0; i < data.time.time.length; i++) {
+            var div = document.createElement("div");
+            var node = document.createElement("p");
+            var textnode = document.createTextNode(data.time.time[i].f1);
+            node.appendChild(textnode);
+            node.setAttribute("class", "p_time_1");
+            div.appendChild(node);
+            var node = document.createElement("p");
+            var textnode = document.createTextNode(data.time.time[i].f2);
+            node.appendChild(textnode);
+            node.setAttribute("class", "p_time_2");
+            div.appendChild(node);
+            center.appendChild(div);
+        }
+    })
     //time 1
     var node = document.createElement("input");
     node.setAttribute('type', 'time');
-    node.setAttribute("class", "time_input");
+    node.setAttribute("class", "time_input_1");
     node.setAttribute("id", "firsttime");
     center.appendChild(node);
     //time 2
     var node = document.createElement("input");
     node.setAttribute('type', 'time');
-    node.setAttribute("class", "time_input");
+    node.setAttribute("class", "time_input_2");
     node.setAttribute("id", "secondtime");
     center.appendChild(node);
     //button
