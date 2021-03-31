@@ -7,12 +7,16 @@ function loadWebsite() {
     node.setAttribute("class", "center_header")
     center.appendChild(node);
     chrome.storage.sync.get("website", function(data) {
-        for (var i = 0; i < data.website.website.length; i++) {
-          var node = document.createElement("p");
-          var text = document.createTextNode(data.website.website[i].name);
-          node.appendChild(text);
-          node.setAttribute("class", "center_website_p")
-          center.appendChild(node);
+        try {
+            for (var i = 0; i < data.website.website.length; i++) {
+                var node = document.createElement("p");
+                var text = document.createTextNode(data.website.website[i].name);
+                node.appendChild(text);
+                node.setAttribute("class", "center_website_p")
+                center.appendChild(node);
+              }
+        } catch (error) {
+            console.error(error);   
         }
     })
     var node = document.createElement("button");
@@ -23,29 +27,35 @@ function loadWebsite() {
     //eventListener for new website
     node.addEventListener("click", function() {
         var value = document.getElementById("website_input").value;
-        chrome.storage.sync.get("website", function(data) {
-            console.log(data);
-            try {
-                console.log(data.website.website.push({"name": value}));
-                var new_data = data;
-                chrome.storage.sync.set({"website": new_data.website}), function() {
-                    console.log("Message: data saved")
-                    console.log(data)
+        //start
+        if (value) {
+            chrome.storage.sync.get("website", function(data) {
+                console.log(data);
+                try {
+                    console.log(data.website.website.push({"name": value}));
+                    var new_data = data;
+                    chrome.storage.sync.set({"website": new_data.website}), function() {
+                        console.log("Message: data saved")
+                        console.log(data)
+                    }
+                    document.getElementById("website_input").value = "";
+                    var node = document.createElement("p");
+                    var text = document.createTextNode(value);
+                    node.appendChild(text);
+                    node.setAttribute("class", "center_website_p")
+                    center.appendChild(node);
+                    center.scrollTo(0, center.scrollHeight);
+                } catch (error) {
+                    console.log(error);
+                    var x = {"website": []}
+                    chrome.storage.sync.set({"website":x})
                 }
-                document.getElementById("website_input").value = "";
-                var node = document.createElement("p");
-                var text = document.createTextNode(value);
-                node.appendChild(text);
-                node.setAttribute("class", "center_website_p")
-                center.appendChild(node);
-                center.scrollTo(0, center.scrollHeight);
-            } catch (error) {
-                console.log(error);
-                var x = {"website": []}
-                chrome.storage.sync.set({"website":x})
-            }
-            
-        })
+                
+            })
+        } else {
+            console.log("Message: Invalid Input")
+        }
+        //end
     })
     center.appendChild(node);
     var node = document.createElement("input");
@@ -140,8 +150,7 @@ function loadTimeline() {
             t1 = document.getElementById("firsttime").value = null;
             t2 = document.getElementById("secondtime").value = null;
         } else {
-            console.log("Message: input not valid");
-            console.log("Message: time1 bigger time2")
+            console.log("Message: Invalid Input");
         };
     })
     center.appendChild(node);
