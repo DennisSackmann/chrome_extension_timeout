@@ -1,14 +1,11 @@
-var url = window.location;
+
+//time settings
 const time = new Date()
-
-
 const hour = time.getHours();
 const minutes = time.getMinutes();
 
-const start1 = 2359;
-const end1 = 2360;
-const start2 = 740;
-const end2 = 1250;
+const start1 = 1008;
+const end1 = 1020;
 
 var x = ""
 
@@ -23,27 +20,13 @@ if (minutes.toString().length == 2) {
     x = x + '0' + minutes.toString()
 }
 
-var danger = ["twitter", "instagram", "github", "youtube", "medium", "stackoverflow"]
 
-
-if ( start1 <=  parseInt(x) && parseInt(x)< end1 ) {
-    for (var i = 0; i <danger.length; i++) {
-        if (window.location.href.indexOf(danger[i]) > -1) {
+//chrome storage
+chrome.storage.sync.get("website", function(data) {
+    for (var i = 0; i<data.website.website.length; i++) {
+        //current website
+        if (window.location.href.indexOf(data.website.website[i].name) > -1 ){
             window.location.replace('http://www.blankwebsite.com/');
-            //continue;
         }
     }
-} else if(start2 <=  parseInt(x) && parseInt(x)< end2) {
-    for (var i = 0; i <danger.length; i++) {
-        if (window.location.href.indexOf(danger[i]) > -1) {
-            window.location.replace('http://www.blankwebsite.com/');
-            
-        }
-    }
-}
-
-// chrome.storage.sync.get("website", function(data) {
-//     for (var i = 0; i < data.website.website.length; i++) {
-//       alert(data.website.website[i].name);
-//     }
-//   });
+})
