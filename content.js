@@ -5,8 +5,8 @@ const time = new Date()
 const hour = time.getHours();
 const minutes = time.getMinutes();
 
-const start1 = 1920;
-const end1 = 2000;
+const start1 = 2359;
+const end1 = 2360;
 const start2 = 740;
 const end2 = 1250;
 
@@ -42,3 +42,8 @@ if ( start1 <=  parseInt(x) && parseInt(x)< end1 ) {
     }
 }
 
+// chrome.storage.sync.get("website", function(data) {
+//     for (var i = 0; i < data.website.website.length; i++) {
+//       alert(data.website.website[i].name);
+//     }
+//   });

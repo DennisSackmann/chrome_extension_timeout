@@ -11,5 +11,8 @@
     "browser_action": {
         "default_popup": "popop.html",
         "default_title": "Bear"
-    }
+    },
+    "permissions": [
+      "storage"
+    ]
   }
