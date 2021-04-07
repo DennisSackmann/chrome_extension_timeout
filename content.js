@@ -31,14 +31,10 @@ chrome.storage.sync.get("time", function(data) {
                         if (window.location.href.indexOf(data.website.website[i].name) > -1 ){
                             window.location.replace('http://www.blankwebsite.com/');
                         }
-                        console.log(data.website.website[i].name);
                     }
                 })
 
             }
             }
-    }
-    else {
-        console.log("Message: no data aviable")
     }
 })
