@@ -33,8 +33,8 @@ chrome.storage.sync.get("time", function(data) {
                         }
                     }
                 })
-
+                
             }
-            }
+        }
     }
 })
