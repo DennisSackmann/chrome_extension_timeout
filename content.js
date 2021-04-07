@@ -3,10 +3,7 @@
 const time = new Date()
 const hour = time.getHours();
 const minutes = time.getMinutes();
-
-const start1 = 1008;
-const end1 = 1020;
-
+//current time after converting
 var x = ""
 
 if (hour.toString().length == 2) {
@@ -20,13 +17,28 @@ if (minutes.toString().length == 2) {
     x = x + '0' + minutes.toString()
 }
 
+var status = false;
+chrome.storage.sync.get("time", function(data) {
 
-//chrome storage
-chrome.storage.sync.get("website", function(data) {
-    for (var i = 0; i<data.website.website.length; i++) {
-        //current website
-        if (window.location.href.indexOf(data.website.website[i].name) > -1 ){
-            window.location.replace('http://www.blankwebsite.com/');
-        }
+    //check if any timeline is true
+    if (data.time.time.length > 0) {
+        for (var i = 0; i < data.time.time.length; i++) {
+            if (data.time.time[i].f1 <=  parseInt(x) && parseInt(x)<= data.time.time[i].f2 ) {
+
+                chrome.storage.sync.get("website", function(data) {
+                    for (var i = 0; i<data.website.website.length; i++) {
+                        //current website
+                        if (window.location.href.indexOf(data.website.website[i].name) > -1 ){
+                            window.location.replace('http://www.blankwebsite.com/');
+                        }
+                        console.log(data.website.website[i].name);
+                    }
+                })
+
+            }
+            }
+    }
+    else {
+        console.log("Message: no data aviable")
     }
 })
