@@ -17,24 +17,22 @@ if (minutes.toString().length == 2) {
     x = x + '0' + minutes.toString()
 }
 
-var status = false;
 chrome.storage.sync.get("time", function(data) {
 
-    //check if any timeline is true
     if (data.time.time.length > 0) {
-        for (var i = 0; i < data.time.time.length; i++) {
-            if (data.time.time[i].f1 <=  parseInt(x) && parseInt(x)<= data.time.time[i].f2 ) {
-
+        data.time.time.forEach(element => {
+            console.log(element.f1, element.f2);
+            if (element.f1 <=  parseInt(x) && parseInt(x)<= element.f2 ) {
                 chrome.storage.sync.get("website", function(data) {
-                    for (var i = 0; i<data.website.website.length; i++) {
-                        //current website
-                        if (window.location.href.indexOf(data.website.website[i].name) > -1 ){
-                            window.location.replace('http://www.blankwebsite.com/');
+                    data.website.website.forEach(element => {
+                        console.log(element.name)
+                        if (window.location.href.indexOf(element.name) > -1) {
+                            window.location.replace("https://www.blank.org/");
                         }
-                    }
+                    })
                 })
-                
             }
-        }
+        });
     }
+
 })
