@@ -1,9 +1,7 @@
-
-//time settings
 const time = new Date()
 const hour = time.getHours();
 const minutes = time.getMinutes();
-//current time after converting
+
 var x = ""
 
 if (hour.toString().length == 2) {

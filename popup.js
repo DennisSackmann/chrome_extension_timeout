@@ -118,37 +118,48 @@ function loadTimeline() {
             if (t1.toString().startsWith("0")) {
                 time = t1.toString().slice(1).split(":");
                 first_time = time[0] + time[1]
-                console.log(first_time);
             } else {
                 time = t1.toString().split(":");
                 first_time = time[0] + time[1]
-                console.log(first_time)
             }
             if (t2.toString().startsWith("0")) {
                 time = t2.toString().slice(1).split(":");
                 second_time = time[0] + time[1]
-                console.log(second_time);
             } else {
                 time = t2.toString().split(":");
                 second_time = time[0] + time[1]
-                console.log(second_time);
             }
             chrome.storage.sync.get("time", function(data) {
-                console.log(data);
                 try {
                     console.log(data.time.time.push({"f1": first_time, "f2": second_time}));
                     var new_data = data;
                     chrome.storage.sync.set({"time": new_data.time}), function() {
                         console.log("Message: data saved")
                     }
+                    //test
+                    t1 = document.getElementById("firsttime").value = null;
+                    t2 = document.getElementById("secondtime").value = null;
+                    var div = document.createElement("div");
+                    var node = document.createElement("p");
+                    var textnode = document.createTextNode(first_time);
+                    node.appendChild(textnode);
+                    node.setAttribute("class", "p_time_1");
+                    div.appendChild(node);
+                    var node = document.createElement("p");
+                    var textnode = document.createTextNode(second_time);
+                    node.appendChild(textnode);
+                    node.setAttribute("class", "p_time_2");
+                    div.appendChild(node);
+                    center.appendChild(div);
+                    //end test
                 } catch (error) {
                     console.log(error);
                     var x = {"time": []}
                     chrome.storage.sync.set({"time":x})
+                    t1 = document.getElementById("firsttime").value = null;
+                    t2 = document.getElementById("secondtime").value = null;
                 }
             })
-            t1 = document.getElementById("firsttime").value = null;
-            t2 = document.getElementById("secondtime").value = null;
         } else {
             console.log("Message: Invalid Input");
         };
