@@ -1,4 +1,4 @@
 # About
 
 A Chrome Extension, to stay productive during work. 
-It Blocks your websites in your timeline.
+It blocks your websites in your timeline.
