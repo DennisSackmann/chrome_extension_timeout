@@ -7,7 +7,6 @@ function loadWebsite() {
     node.setAttribute("class", "center_header")
     center.appendChild(node);
     chrome.storage.sync.get("website", function(data) {
-        console.log(data);
         try {
             for (var i = 0; i < data.website.website.length; i++) {
                 var node = document.createElement("p");
@@ -36,7 +35,6 @@ function loadWebsite() {
     //eventListener for new website
     node.addEventListener("click", function() {
         var value = document.getElementById("website_input").value;
-        //start
         if (value) {
             chrome.storage.sync.get("website", function(data) {
                 console.log(data);
@@ -47,13 +45,6 @@ function loadWebsite() {
                         console.log("Message: data saved")
                         console.log(data)
                     }
-                    // document.getElementById("website_input").value = "";
-                    // var node = document.createElement("p");
-                    // var text = document.createTextNode(value);
-                    // node.appendChild(text);
-                    // node.setAttribute("class", "center_website_p")
-                    // center.appendChild(node);
-                    // center.scrollTo(0, center.scrollHeight);
                     loadWebsite();
                 } catch (error) {
                     console.log(error);
@@ -65,7 +56,6 @@ function loadWebsite() {
         } else {
             console.log("Message: Invalid Input")
         }
-        //end
     })
     center.appendChild(node);
     var node = document.createElement("input");
@@ -87,6 +77,7 @@ function loadTimeline() {
     center.appendChild(node);
     //timelines
     chrome.storage.sync.get("time", function(data) {
+        console.log(data);
         for (var i = 0; i < data.time.time.length; i++) {
             var div = document.createElement("div");
             var node = document.createElement("p");
@@ -98,6 +89,14 @@ function loadTimeline() {
             var textnode = document.createTextNode(data.time.time[i].f2);
             node.appendChild(textnode);
             node.setAttribute("class", "p_time_2");
+            div.appendChild(node);
+            var node = document.createElement("button");
+            var text = document.createTextNode("Delete Timeline");
+            node.appendChild(text);
+            node.setAttribute("id", i);
+            node.addEventListener("click", function() {
+                deleteTime(this.id);
+            })
             div.appendChild(node);
             center.appendChild(div);
         }
@@ -146,22 +145,7 @@ function loadTimeline() {
                     chrome.storage.sync.set({"time": new_data.time}), function() {
                         console.log("Message: data saved")
                     }
-                    //test
-                    t1 = document.getElementById("firsttime").value = null;
-                    t2 = document.getElementById("secondtime").value = null;
-                    var div = document.createElement("div");
-                    var node = document.createElement("p");
-                    var textnode = document.createTextNode(first_time);
-                    node.appendChild(textnode);
-                    node.setAttribute("class", "p_time_1");
-                    div.appendChild(node);
-                    var node = document.createElement("p");
-                    var textnode = document.createTextNode(second_time);
-                    node.appendChild(textnode);
-                    node.setAttribute("class", "p_time_2");
-                    div.appendChild(node);
-                    center.appendChild(div);
-                    //end test
+                    loadTimeline();
                 } catch (error) {
                     console.log(error);
                     var x = {"time": []}
@@ -191,6 +175,24 @@ function deleteWebsite(id) {
         })
         loadWebsite();
     })
+}
+
+function deleteTime(id) {
+    chrome.storage.sync.get("time", function(data) {
+        delete data.time.time[id].f1;
+        delete data.time.time[id].f2;
+        console.log(data);  
+        var x = {"time": []}
+        data.time.time.forEach(element => {
+            if (element.f1, element.f2) {
+                x.time.push({"f1": element.f1, "f2": element.f2})
+            }
+        });
+        chrome.storage.sync.set({"time":x}, () => {
+            console.log("Message: Sucess!");
+        })
+        loadTimeline();
+    });
 }
 
 
