@@ -7,12 +7,21 @@ function loadWebsite() {
     node.setAttribute("class", "center_header")
     center.appendChild(node);
     chrome.storage.sync.get("website", function(data) {
+        console.log(data);
         try {
             for (var i = 0; i < data.website.website.length; i++) {
                 var node = document.createElement("p");
                 var text = document.createTextNode(data.website.website[i].name);
                 node.appendChild(text);
-                node.setAttribute("class", "center_website_p")
+                node.setAttribute("class", "center_website_p");
+                center.appendChild(node);
+                var node = document.createElement("button");
+                var text = document.createTextNode("Delete Website");
+                node.appendChild(text);
+                node.setAttribute("id", i);
+                node.addEventListener("click", function () {
+                    deleteWebsite(this.id);
+                });
                 center.appendChild(node);
               }
         } catch (error) {
@@ -38,13 +47,14 @@ function loadWebsite() {
                         console.log("Message: data saved")
                         console.log(data)
                     }
-                    document.getElementById("website_input").value = "";
-                    var node = document.createElement("p");
-                    var text = document.createTextNode(value);
-                    node.appendChild(text);
-                    node.setAttribute("class", "center_website_p")
-                    center.appendChild(node);
-                    center.scrollTo(0, center.scrollHeight);
+                    // document.getElementById("website_input").value = "";
+                    // var node = document.createElement("p");
+                    // var text = document.createTextNode(value);
+                    // node.appendChild(text);
+                    // node.setAttribute("class", "center_website_p")
+                    // center.appendChild(node);
+                    // center.scrollTo(0, center.scrollHeight);
+                    loadWebsite();
                 } catch (error) {
                     console.log(error);
                     var x = {"website": []}
@@ -165,6 +175,22 @@ function loadTimeline() {
         };
     })
     center.appendChild(node);
+}
+
+function deleteWebsite(id) {
+    chrome.storage.sync.get("website", function(data) {
+        delete data.website.website[id].name;
+        var x = {"website": []}
+        data.website.website.forEach(element => {
+            if(element.name) {
+                x.website.push({"name": element.name})
+            }
+        });
+        chrome.storage.sync.set({"website":x}, () => {
+            console.log("Message: Sucess!")
+        })
+        loadWebsite();
+    })
 }
 
 
