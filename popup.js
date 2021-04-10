@@ -196,18 +196,7 @@ function deleteTime(id) {
 }
 
 
-window.onload = function() {
-    document.getElementById("deleteWeb").addEventListener("click", function() {
-        var x = {"website": []}
-        chrome.storage.sync.set({"website":x});
-      });
-      document.getElementById("deleteTime").addEventListener("click", function() {
-            var x = {"time": []}
-            chrome.storage.sync.set({"time":x});
-      });
-
-
-    
+window.onload = function() {    
     loadWebsite();
 
     document.getElementById("website").onclick = function() {
