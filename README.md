@@ -1,4 +1,4 @@
-# Idee
+# About
 
-Eine Chrome Extension, mit welcher man das öffnen bestimmter Websiten verbieten kann.
-
+A Chrome Extension, to stay productive during work. 
+It blocks your websites in your timeline.
